@@ -1,0 +1,41 @@
+spring:
+  main:
+    web-application-type: reactive
+    allow-bean-definition-overriding: true
+  application:
+  cloud:
+    gateway:
+      routes:
+        - id: auth-service
+          uri: lb://localhost:8080
+          predicates:
+            - Path=/auth/**
+        - id: get-service
+          uri: lb://localhost:8081
+          predicates:
+            - Path=/test/**
+#        - id: get-service
+#          uri: http://localhost:8080
+#          predicates:
+#            - Path=/fetched-persons/**
+
+#  security:
+#    oauth2:
+#      client:
+#        provider:
+#          my-keycloak-provider:
+#            issuer-uri: http://localhost:1111/realms/bank
+#        registration:
+#          keycloak-spring-gateway-client:
+#            provider: my-keycloak-provider
+#            client-id: bank-client
+#            client-secret: 5Ah2mNfEVx25kSpaDP97rpiFObC2dueU
+#            authorization-grant-type: authorization_code
+#            redirect-uri: '{baseUrl}/login/oauth2/code/keycloak'
+server:
+  port: 9090
+
+eureka:
+  client:
+    serviceURL:
+      defaultZone: http://localhost:8761/eureka/

@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: get-service
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost:1111/realms/bank/protocol/openid-connect/certs
+
+  config:
+    import: optional:configserver:http://localhost:8012
+
+
+server:
+  port: 8081
