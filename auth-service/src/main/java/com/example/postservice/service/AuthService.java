@@ -1,5 +1,7 @@
 package com.example.postservice.service;
 
+import com.example.accountservice.model.Account;
+import com.example.accountservice.model.AccountDTO;
 import com.example.postservice.DTO.LoginResponse;
 import com.example.postservice.DTO.TokenRequest;
 import com.example.postservice.DTO.UserRegisterRequest;
@@ -9,6 +11,7 @@ import com.example.postservice.model.User;
 import com.example.postservice.repository.RoleRepository;
 import com.example.postservice.repository.UserRepository;
 import com.example.postservice.security.JwtTokenUtil;
+import com.example.postservice.util.AccountServiceUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -28,6 +31,8 @@ public class AuthService {
 
     private final PasswordEncoder passwordEncoder;
 
+    private final AccountServiceUtil accountServiceUtil;
+
     private final JwtTokenUtil jwtTokenUtil;
 
     public TokenRequest login(LoginResponse userResponse) {
@@ -45,8 +50,7 @@ public class AuthService {
 
         User user = createUser(userResponse);
 
-//        roleRepository.save(new Role(UUID.randomUUID(), "ROLE_USER"));
-//        roleRepository.save(new Role(UUID.randomUUID(), "ROLE_ADMIN"));
+        AccountDTO account = accountServiceUtil.createAccount(user.getId());
 
         List<Role> roles = roleRepository.findByNameIn(userResponse.getRoles().stream().toList());
 
@@ -54,7 +58,7 @@ public class AuthService {
 
         User savedUser = userRepository.save(user);
 
-        return new UserRegisterRequest(savedUser.getUsername(), savedUser.getSurname(), userResponse.getPassword(), roles.stream().map(Role::getName).collect(Collectors.toSet()));
+        return new UserRegisterRequest(savedUser.getUsername(), savedUser.getSurname(), userResponse.getPassword(), roles.stream().map(Role::getName).collect(Collectors.toSet()),account);
     }
 
     private User createUser(UserResponse userResponse) {

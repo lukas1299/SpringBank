@@ -19,7 +19,7 @@ import java.util.UUID;
 @Setter
 public class User {
     @Id
-    @Column(name = "student_id", nullable = false)
+    @Column(name = "user_id", nullable = false)
     private UUID id;
 
     private String username;
@@ -29,7 +29,7 @@ public class User {
     @ManyToMany
     @JoinTable(
             name = "user_role",
-            joinColumns = @JoinColumn(name = "student_id"),
+            joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> roles;
 

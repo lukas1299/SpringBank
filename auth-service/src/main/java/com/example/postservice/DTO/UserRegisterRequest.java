@@ -1,5 +1,6 @@
 package com.example.postservice.DTO;
 
+import com.example.accountservice.model.AccountDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,4 +16,5 @@ public class UserRegisterRequest {
     private String surname;
     private String password;
     private Set<String> roles;
+    private AccountDTO account;
 }

@@ -17,11 +17,12 @@ public class RouterValidator {
 
     public static final List<String> openApiEndpoints= List.of(
             "/auth/register",
-            "/auth/login"
+            "/auth/login",
+            "/auth/role"
     );
 
     public static final Map<String, List<String>> apiEndpoints = Map.of(
-            "/account", List.of("ROLE_USER", "ROLE_ADMIN"),
+            "/account", List.of("ROLE_ADMIN"),
             "/admin", List.of("ROLE_ADMIN"),
             "/test", List.of("ROLE_USER")
     );
@@ -33,7 +34,13 @@ public class RouterValidator {
 
     public boolean hasRequiredRoles(ServerHttpRequest request, String token){
         Claims claims = jwtUtil.getAllClaimsFromToken(token);
-        return apiEndpoints.get(request.getURI().getPath()).stream()
-                .anyMatch(claims.get("roles", List.class)::contains);
+        String path = request.getURI().getPath();
+        return apiEndpoints.keySet().stream()
+                .filter(path::contains)
+                .findFirst()
+                .map(endpoint -> apiEndpoints.get(endpoint).stream()
+                        .anyMatch(claims.get("roles", List.class)::contains))
+                .orElse(false);
     }
+
 }

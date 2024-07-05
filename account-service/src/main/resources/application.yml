@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: account-service
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost:1111/realms/bank/protocol/openid-connect/certs
+
+  config:
+    import: optional:configserver:http://localhost:8012
+
+  datasource:
+    url: jdbc:postgresql://localhost:3214/accountDB
+    username: account
+    password: account
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+
+server:
+  port: 8082

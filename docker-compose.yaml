@@ -1,6 +1,6 @@
 version: '3.8'
 services:
-  postgres:
+  postgres-user:
     image: postgres:16.3-alpine
     ports:
       - "2345:5432"
@@ -10,3 +10,14 @@ services:
       - POSTGRES_PASSWORD=user
       - POSTGRES_USER=user
       - POSTGRES_DB=userDB
+
+  postgres-account:
+    image: postgres:16.3-alpine
+    ports:
+      - "3214:5432"
+    volumes:
+      - ~/apps/postgres:/data/postgres
+    environment:
+      - POSTGRES_PASSWORD=account
+      - POSTGRES_USER=account
+      - POSTGRES_DB=accountDB
