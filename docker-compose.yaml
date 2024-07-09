@@ -21,3 +21,14 @@ services:
       - POSTGRES_PASSWORD=account
       - POSTGRES_USER=account
       - POSTGRES_DB=accountDB
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: 'rabbitmq'
+    environment:
+      - 'RABBITMQ_DEFAULT_PASS=user'
+      - 'RABBITMQ_DEFAULT_USER=user'
+    ports:
+      - 5672:5672
+      - 15672:15672
+

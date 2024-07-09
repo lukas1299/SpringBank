@@ -18,13 +18,15 @@ public class GatewayConfig {
                 .route("auth-service", r -> r.path("/auth/**")
                         .filters(f -> f.filter(filter))
                         .uri("lb://auth-service"))
-
-                .route("get-service", r -> r.path("/test")
-                        .filters(f -> f.filter(filter))
-                        .uri("lb://get-service"))
                 .route("account-service", r -> r.path("/account/**")
                         .filters(f -> f.filter(filter))
                         .uri("lb://account-service"))
+                .route("transaction-service", r -> r.path("/transaction/**")
+                        .filters(f -> f.filter(filter))
+                        .uri("lb://transaction-service"))
+                .route("get-service", r -> r.path("/test")
+                        .filters(f -> f.filter(filter))
+                        .uri("lb://get-service"))
                 .build();
     }
 

@@ -1,6 +1,5 @@
 package com.example.postservice.service;
 
-import com.example.accountservice.model.Account;
 import com.example.accountservice.model.AccountDTO;
 import com.example.postservice.DTO.LoginResponse;
 import com.example.postservice.DTO.TokenRequest;
