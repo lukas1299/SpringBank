@@ -1,5 +1,6 @@
 package com.example.postservice.security;
 
+import com.example.postservice.exception.UsernameAlreadyExistException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +28,11 @@ public class AuthExceptionHandler {
         );
     }
 
-
-
+    @ExceptionHandler(UsernameAlreadyExistException.class)
+    public ResponseEntity<ErrorResponse> handleEntityAlreadyExistsException(UsernameAlreadyExistException e) {
+        return new ResponseEntity<>(
+                new ErrorResponse(HttpStatus.CONFLICT.value(), e.getMessage()),
+                HttpStatus.CONFLICT
+        );
+    }
 }

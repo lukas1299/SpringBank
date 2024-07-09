@@ -5,12 +5,14 @@ import com.example.postservice.DTO.LoginResponse;
 import com.example.postservice.DTO.TokenRequest;
 import com.example.postservice.DTO.UserRegisterRequest;
 import com.example.postservice.DTO.UserResponse;
+import com.example.postservice.exception.UsernameAlreadyExistException;
 import com.example.postservice.model.Role;
 import com.example.postservice.model.User;
 import com.example.postservice.repository.RoleRepository;
 import com.example.postservice.repository.UserRepository;
 import com.example.postservice.security.JwtTokenUtil;
 import com.example.postservice.util.AccountServiceUtil;
+import jakarta.persistence.EntityExistsException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -45,7 +47,9 @@ public class AuthService {
         return new TokenRequest(jwtTokenUtil.generateToken(userResponse.getLogin(), user.getRoles()));
     }
 
-    public UserRegisterRequest register(UserResponse userResponse) {
+    public UserRegisterRequest register(UserResponse userResponse) throws UsernameAlreadyExistException {
+
+        if (userRepository.findByUsername(userResponse.getUsername()).isPresent()) throw new UsernameAlreadyExistException("Username already exist.");
 
         User user = createUser(userResponse);
 
