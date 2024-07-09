@@ -13,7 +13,15 @@ spring:
     password: "user"
   config:
     import: optional:configserver:http://localhost:8012
-
-
+  datasource:
+    url: jdbc:postgresql://localhost:4123/transactionDB
+    username: transaction
+    password: transaction
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
 server:
   port: 8081

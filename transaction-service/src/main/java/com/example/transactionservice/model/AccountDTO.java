@@ -1,4 +1,4 @@
-package com.example.accountservice.model;
+package com.example.transactionservice.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,25 +1,25 @@
 package com.example.transactionservice.service;
 
-import com.example.transactionservice.config.RabbitMQConfig;
-import com.example.transactionservice.model.Email;
+import com.example.transactionservice.model.AccountRequest;
+import com.example.transactionservice.model.Transaction;
 import com.example.transactionservice.repository.TransactionRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
+
+import java.sql.Date;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
 public class TransactionService {
 
-    //private final TransactionRepository transactionRepository;
+    private final TransactionRepository transactionRepository;
 
-    private final RabbitTemplate rabbitTemplate;
-
-    public String createTransaction(){
-
-        Email mess = new Email("Mess", "INFO");
-        rabbitTemplate.convertAndSend(RabbitMQConfig.queueName, mess);
-        return mess.toString();
+    public Transaction createTransaction(AccountRequest accountRequest) {
+        return new Transaction(UUID.randomUUID(),
+                accountRequest.getFrom(),
+                accountRequest.getTargetAccountNumber(),
+                new Date(System.currentTimeMillis()),
+                accountRequest.getAmount());
     }
-
 }
