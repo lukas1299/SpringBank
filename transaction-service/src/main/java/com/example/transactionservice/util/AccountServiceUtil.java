@@ -1,5 +1,6 @@
 package com.example.transactionservice.util;
 
+import com.example.accountservice.model.AccountRequest;
 import com.example.transactionservice.model.AccountDTO;
 
 import org.springframework.cloud.openfeign.FeignClient;
@@ -12,7 +13,7 @@ import java.util.UUID;
 public interface AccountServiceUtil {
 
     @PostMapping("/account/{userId}/transaction")
-    AccountDTO createAccount(@PathVariable("userId") UUID userId);
+    AccountDTO createAccount(@PathVariable("userId") UUID userId, @RequestBody AccountRequest accountRequest);
 
     @PatchMapping("/account")
     AccountDTO updateAccount(@RequestParam String targetAccountNumber, @RequestParam BigDecimal amount, @RequestParam String operation);
@@ -20,3 +21,7 @@ public interface AccountServiceUtil {
     @GetMapping("/{userId}")
     AccountDTO getAccount(@PathVariable("userId") UUID userId);
 }
+
+
+
+

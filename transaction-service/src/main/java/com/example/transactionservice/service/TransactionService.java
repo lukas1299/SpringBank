@@ -1,6 +1,7 @@
 package com.example.transactionservice.service;
 
-import com.example.transactionservice.model.AccountRequest;
+
+import com.example.accountservice.model.AccountRequest;
 import com.example.transactionservice.model.Transaction;
 import com.example.transactionservice.repository.TransactionRepository;
 import lombok.RequiredArgsConstructor;

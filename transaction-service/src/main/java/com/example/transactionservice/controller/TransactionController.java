@@ -1,6 +1,7 @@
 package com.example.transactionservice.controller;
 
-import com.example.transactionservice.model.AccountRequest;
+
+import com.example.accountservice.model.AccountRequest;
 import com.example.transactionservice.service.TransactionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

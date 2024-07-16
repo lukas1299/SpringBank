@@ -1,6 +1,9 @@
 package com.example.accountservice.service;
 
 import com.example.accountservice.model.Account;
+import com.example.accountservice.model.AccountDTO;
+import com.example.accountservice.model.AccountRequest;
+import com.example.accountservice.repository.AccountRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
