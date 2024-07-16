@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
@@ -35,7 +36,7 @@ public class RouterValidator {
 
     public boolean hasRequiredRoles(ServerHttpRequest request, String token){
         Claims claims = jwtUtil.getAllClaimsFromToken(token);
-        String path = request.getURI().getPath();
+        String path = "/" + Arrays.asList(request.getURI().getPath().split("/")).get(1);
         return apiEndpoints.keySet().stream()
                 .filter(path::contains)
                 .findFirst()

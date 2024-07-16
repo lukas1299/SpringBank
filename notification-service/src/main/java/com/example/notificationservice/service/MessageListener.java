@@ -1,6 +1,6 @@
-package com.example.transactionservice.service;
+package com.example.notificationservice.service;
 
-import com.example.transactionservice.model.Email;
+import com.example.notificationservice.model.Email;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 

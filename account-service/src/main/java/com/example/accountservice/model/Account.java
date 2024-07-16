@@ -23,6 +23,7 @@ public class Account {
     @Column(name = "id", nullable = false)
     private UUID id;
 
+    private String accountNumber;
     private UUID userId;
     private BigDecimal balance;
 

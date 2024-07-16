@@ -84,12 +84,12 @@
       <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-core</artifactId>
     </dependency>
-    <dependency>
-      <groupId>com.example</groupId>
-      <artifactId>transaction-service</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
-      <scope>compile</scope>
-    </dependency>
+<!--    <dependency>-->
+<!--      <groupId>com.example</groupId>-->
+<!--      <artifactId>transaction-service</artifactId>-->
+<!--      <version>0.0.1-SNAPSHOT</version>-->
+<!--      <scope>compile</scope>-->
+<!--    </dependency>-->
     <!--    <dependency>-->
 <!--      <groupId>com.example</groupId>-->
 <!--      <artifactId>account-service</artifactId>-->
